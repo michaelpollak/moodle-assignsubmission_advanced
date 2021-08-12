@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/assign/submission/comprimg/db" VERSION="2021050700" COMMENT="XMLDB comprimg for Moodle mod/assign/submission/comprimg"
+<XMLDB PATH="mod/assign/submission/advanced/db" VERSION="2021050700" COMMENT="XMLDB advanced for Moodle mod/assign/submission/advanced"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="assignsubmission_comprimg" COMMENT="Info about compressed images uploaded for assignments">
+    <TABLE NAME="assignsubmission_advanced" COMMENT="Info about compressed images uploaded for assignments">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="assignment" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>

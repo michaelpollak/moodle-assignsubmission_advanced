@@ -15,21 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The assignsubmission_comprimg submission_created event.
+ * The assignsubmission_advanced submission_created event.
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace assignsubmission_comprimg\event;
+namespace assignsubmission_advanced\event;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * The assignsubmission_comprimg submission_created event class.
+ * The assignsubmission_advanced submission_created event class.
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -40,7 +40,7 @@ class submission_created extends \mod_assign\event\submission_created {
      */
     protected function init() {
         parent::init();
-        $this->data['objecttable'] = 'assignsubmission_comprimg';
+        $this->data['objecttable'] = 'assignsubmission_advanced';
     }
 
     /**
@@ -56,7 +56,7 @@ class submission_created extends \mod_assign\event\submission_created {
     }
 
     public static function get_objectid_mapping() {
-        // No mapping available for 'assignsubmission_comprimg'.
-        return array('db' => 'assignsubmission_comprimg', 'restore' => \core\event\base::NOT_MAPPED);
+        // No mapping available for 'assignsubmission_advanced'.
+        return array('db' => 'assignsubmission_advanced', 'restore' => \core\event\base::NOT_MAPPED);
     }
 }

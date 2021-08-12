@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains the moodle hooks for the submission comprimg plugin
+ * This file contains the moodle hooks for the submission advanced plugin
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,7 +35,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param array $options - List of options affecting file serving.
  * @return bool false if file not found, does not return if found - just send the file
  */
-function assignsubmission_comprimg_pluginfile($course,
+function assignsubmission_advanced_pluginfile($course,
                                           $cm,
                                           context $context,
                                           $filearea,
@@ -77,7 +77,7 @@ function assignsubmission_comprimg_pluginfile($course,
 
     $relativepath = implode('/', $args);
 
-    $fullpath = "/{$context->id}/assignsubmission_comprimg/$filearea/$itemid/$relativepath";
+    $fullpath = "/{$context->id}/assignsubmission_advanced/$filearea/$itemid/$relativepath";
 
     $fs = get_file_storage();
     if (!($file = $fs->get_file_by_hash(sha1($fullpath))) || $file->is_directory()) {

@@ -17,12 +17,12 @@
 /**
  * Privacy class for requesting user data.
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace assignsubmission_comprimg\privacy;
+namespace assignsubmission_advanced\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -36,7 +36,7 @@ use \mod_assign\privacy\assign_plugin_request_data;
 /**
  * Privacy class for requesting user data.
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -52,7 +52,7 @@ class provider implements
      * @return collection Return the collection after adding to it.
      */
     public static function get_metadata(collection $collection) : collection {
-        $collection->link_subsystem('core_files', 'privacy:metadata:comprimgpurpose');
+        $collection->link_subsystem('core_files', 'privacy:metadata:advancedpurpose');
         return $collection;
     }
 
@@ -99,7 +99,7 @@ class provider implements
         }
         $user = new \stdClass();
         $assign = $exportdata->get_assign();
-        $plugin = $assign->get_plugin_by_type('assignsubmission', 'comprimg');
+        $plugin = $assign->get_plugin_by_type('assignsubmission', 'advanced');
         $files = $plugin->get_files($exportdata->get_pluginobject(), $user);
         foreach ($files as $file) {
             $userid = $exportdata->get_pluginobject()->userid;
@@ -127,10 +127,10 @@ class provider implements
         \core_plagiarism\privacy\provider::delete_plagiarism_for_context($requestdata->get_context());
 
         $fs = get_file_storage();
-        $fs->delete_area_files($requestdata->get_context()->id, 'assignsubmission_comprimg', assignsubmission_comprimg_FILEAREA);
+        $fs->delete_area_files($requestdata->get_context()->id, 'assignsubmission_advanced', assignsubmission_advanced_FILEAREA);
 
-        // Delete records from assignsubmission_comprimg table.
-        $DB->delete_records('assignsubmission_comprimg', ['assignment' => $requestdata->get_assign()->get_instance()->id]);
+        // Delete records from assignsubmission_advanced table.
+        $DB->delete_records('assignsubmission_advanced', ['assignment' => $requestdata->get_assign()->get_instance()->id]);
     }
 
     /**
@@ -146,10 +146,10 @@ class provider implements
         $submissionid = $deletedata->get_pluginobject()->id;
 
         $fs = get_file_storage();
-        $fs->delete_area_files($deletedata->get_context()->id, 'assignsubmission_comprimg', assignsubmission_comprimg_FILEAREA,
+        $fs->delete_area_files($deletedata->get_context()->id, 'assignsubmission_advanced', assignsubmission_advanced_FILEAREA,
                 $submissionid);
 
-        $DB->delete_records('assignsubmission_comprimg', ['assignment' => $deletedata->get_assignid(), 'submission' => $submissionid]);
+        $DB->delete_records('assignsubmission_advanced', ['assignment' => $deletedata->get_assignid(), 'submission' => $submissionid]);
     }
 
     /**
@@ -171,10 +171,10 @@ class provider implements
         }
         $fs = get_file_storage();
         list($sql, $params) = $DB->get_in_or_equal($deletedata->get_submissionids(), SQL_PARAMS_NAMED);
-        $fs->delete_area_files_select($deletedata->get_context()->id, 'assignsubmission_comprimg', assignsubmission_comprimg_FILEAREA,
+        $fs->delete_area_files_select($deletedata->get_context()->id, 'assignsubmission_advanced', assignsubmission_advanced_FILEAREA,
                 $sql, $params);
 
         $params['assignid'] = $deletedata->get_assignid();
-        $DB->delete_records_select('assignsubmission_comprimg', "assignment = :assignid AND submission $sql", $params);
+        $DB->delete_records_select('assignsubmission_advanced', "assignment = :assignid AND submission $sql", $params);
     }
 }

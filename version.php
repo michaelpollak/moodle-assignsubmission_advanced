@@ -18,7 +18,7 @@
  * This file contains the version information for the compressed images submission plugin.
  * Based on the file submission plugin to allow auto compression of uploaded images.
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,4 +27,4 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2021062602;
 $plugin->requires  = 2020061500;
-$plugin->component = 'assignsubmission_comprimg';
+$plugin->component = 'assignsubmission_advanced';

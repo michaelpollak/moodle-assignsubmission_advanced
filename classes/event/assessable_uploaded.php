@@ -15,21 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The assignsubmission_comprimg assessable uploaded event.
+ * The assignsubmission_advanced assessable uploaded event.
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace assignsubmission_comprimg\event;
+namespace assignsubmission_advanced\event;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * The assignsubmission_comprimg assessable uploaded event class.
+ * The assignsubmission_advanced assessable uploaded event class.
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -51,7 +51,7 @@ class assessable_uploaded extends \core\event\assessable_uploaded {
      * @return string
      */
     public static function get_name() {
-        return get_string('eventassessableuploaded', 'assignsubmission_comprimg');
+        return get_string('eventassessableuploaded', 'assignsubmission_advanced');
     }
 
     /**

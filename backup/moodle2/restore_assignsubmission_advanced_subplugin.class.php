@@ -17,7 +17,7 @@
 /**
  * This file contains the class for restore of this submission plugin
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,11 +28,11 @@
  * Provides the necessary information
  * needed to restore one assign_submission subplugin.
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_assignsubmission_comprimg_subplugin extends restore_subplugin {
+class restore_assignsubmission_advanced_subplugin extends restore_subplugin {
 
     /**
      * Returns the paths to be handled by the subplugin at workshop level
@@ -43,7 +43,7 @@ class restore_assignsubmission_comprimg_subplugin extends restore_subplugin {
         $paths = array();
 
         $elename = $this->get_namefor('submission');
-        $elepath = $this->get_pathfor('/submission_comprimg');
+        $elepath = $this->get_pathfor('/submission_advanced');
         // We used get_recommended_name() so this works.
         $paths[] = new restore_path_element($elename, $elepath);
 
@@ -51,11 +51,11 @@ class restore_assignsubmission_comprimg_subplugin extends restore_subplugin {
     }
 
     /**
-     * Processes one submission_comprimg element
+     * Processes one submission_advanced element
      * @param mixed $data
      * @return void
      */
-    public function process_assignsubmission_comprimg_submission($data) {
+    public function process_assignsubmission_advanced_submission($data) {
         global $DB;
 
         $data = (object)$data;
@@ -65,10 +65,10 @@ class restore_assignsubmission_comprimg_subplugin extends restore_subplugin {
         // when a submission node is processed.
         $data->submission = $this->get_mappingid('submission', $data->submission);
 
-        $DB->insert_record('assignsubmission_comprimg', $data);
+        $DB->insert_record('assignsubmission_advanced', $data);
 
-        $this->add_related_files('assignsubmission_comprimg',
-                                 'submission_comprimg',
+        $this->add_related_files('assignsubmission_advanced',
+                                 'submission_advanced',
                                  'submission',
                                  null,
                                  $oldsubmissionid);

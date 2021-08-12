@@ -17,7 +17,7 @@
 /**
  * This file contains the class for backup of this submission plugin
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,11 +29,11 @@ defined('MOODLE_INTERNAL') || die();
  *
  * This just adds its filearea to the annotations and records the number of files
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_assignsubmission_comprimg_subplugin extends backup_subplugin {
+class backup_assignsubmission_advanced_subplugin extends backup_subplugin {
 
     /**
      * Returns the subplugin information to attach to submission element
@@ -44,7 +44,7 @@ class backup_assignsubmission_comprimg_subplugin extends backup_subplugin {
         // Create XML elements.
         $subplugin = $this->get_subplugin_element();
         $subpluginwrapper = new backup_nested_element($this->get_recommended_name());
-        $subpluginelement = new backup_nested_element('submission_comprimg',
+        $subpluginelement = new backup_nested_element('submission_advanced',
                                                       null,
                                                       array('numfiles', 'submission'));
 
@@ -53,12 +53,12 @@ class backup_assignsubmission_comprimg_subplugin extends backup_subplugin {
         $subpluginwrapper->add_child($subpluginelement);
 
         // Set source to populate the data.
-        $subpluginelement->set_source_table('assignsubmission_comprimg',
+        $subpluginelement->set_source_table('assignsubmission_advanced',
                                             array('submission' => backup::VAR_PARENTID));
 
         // The parent is the submission.
-        $subpluginelement->annotate_files('assignsubmission_comprimg',
-                                          'submission_comprimg',
+        $subpluginelement->annotate_files('assignsubmission_advanced',
+                                          'submission_advanced',
                                           'submission');
         return $subplugin;
     }

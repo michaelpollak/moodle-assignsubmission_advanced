@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'assignsubmission_comprimg', language 'de'
+ * Strings for component 'assignsubmission_advanced', language 'de'
  *
- * @package     assignsubmission_comprimg
+ * @package     assignsubmission_advanced
  * @copyright   2021 michael pollak <moodle@michaelpollak.org>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,10 +25,10 @@
 $string['pluginname'] = 'Komprimierter Dateiupload/Skalierte und komprimierte Bilder';
 $string['default'] = 'Standardmäßig aktiviert';
 $string['default_help'] = 'Wenn markiert werden alle zukünftigen angelegten Aufgaben \'automatisch skalierte und komprimierte Bilder\' als Abgabetyp anbieten.';
-$string['comprimg'] = 'Dateiabgabe<br>- mit Skalierung und Kompression von Bildern<br>- andere Dateitypen bleiben unverändert';
+$string['advanced'] = 'Dateiabgabe<br>- mit Skalierung und Kompression von Bildern<br>- andere Dateitypen bleiben unverändert';
 $string['enabled'] = 'Dateiabgabe mit automatischer Bilderskalierung und -komprimierung';
 $string['enabled_help'] = 'Wenn markiert können Lernende Bilder hochladen die automatisiert auf vorgegebene Maximalwerte für Breite bzw. Höhe skaliert sowie auf eine maximale Dateigröße komprimiert werden.';
-$string['comprimgforlog'] = 'Ein Bild wurde hochgeladen und gegebenenfalls skaliert und komprimiert.';
+$string['advancedforlog'] = 'Ein Bild wurde hochgeladen und gegebenenfalls skaliert und komprimiert.';
 $string['eventassessableuploaded'] = 'Hochladen sowie Skalierung (Größenanpassung) bzw. Komprimierrung (Datenmengenreduktion)';
 $string['siteuploadlimit'] = 'für dieses Moodle maximal erlaubte Dateigröße zum Hochladen';
 
@@ -42,13 +42,15 @@ $string['forcemaxheight'] = 'max. Höhe erzwingen';
 $string['forcemaxheight_help'] = 'Wenn markiert können Lehrende die maximale Höhe nicht ändern.';
 $string['maxfilesize'] = 'max. Dateigröße der Bilder nach Verkleinerung (in MB)';
 $string['maxfilesize_help'] = 'Bilder mit größerer Dateigröße werden automatisch skaliert bzw. komprimiert.';
+$string['allowonlysmaller'] = 'Erlaube nur kleinere Dateien';
+$string['allowonlysmaller_help'] = 'Wenn markiert können Lehrende die maximale Dateigröße lediglich verkleiner.';
 $string['forcemaxfilesize'] = 'max. Dateigröße erzwingen';
 $string['forcemaxfilesize_help'] = 'Wenn markiert können Lehrende die maximale Dateigröße nicht ändern.';
 $string['studentoverride'] = 'Ich möchte die unskalierte und unkomprimierte Original-Datei hochladen obwohl sie nicht auf die den Vorgaben entspricht.';
 $string['noforce'] = "Vorgaben nicht erzwingen";
 $string['noforce_postfix'] = 'Lernende können Abgaben die trotz Skalierung und Kompression nicht auf die vorgegebenen Grenzwerte reduziert werden konnten dennoch hochladen.';
-$string['prefixscaled'] = "skaliert_";
-$string['prefixcomp'] = "komprimiert_";
+$string['prefixscaled'] = "s";
+$string['prefixcomp'] = "k";
 $string['constraints'] = 'Einschränkungen';
 $string['constraintdetails'] = 'Hochgeladene Bilder werden gegebenenfalls auf die folgenden Maximalwerte verkleinert oder komprimiert (Datenmengenreduktion).
 <br>
@@ -63,7 +65,7 @@ $string['maxbytes'] = 'Maximale Dateigröße';
 $string['maxbytes_help'] = 'Alle hochgeladenen Dateien dürfen maximal diese Dateigröße erreichen.';
 
 // Privacy API
-$string['privacy:metadata:comprimgpurpose'] = 'Dateien die für Abgaben hochgeladen und komprimiert wurden.';
+$string['privacy:metadata:advancedpurpose'] = 'Dateien die für Abgaben hochgeladen und komprimiert wurden.';
 
 $string['errorwidthheight'] = 'Das Bild konnte leider nicht skaliert werden.';
 $string['errormaxsize'] = 'Trotz Komprimierung ist das Bild größer als die vorgegebene Dateigröße.
