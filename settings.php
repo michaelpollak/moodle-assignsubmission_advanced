@@ -78,6 +78,12 @@ $settings->add(new admin_setting_configtext('assignsubmission_advanced/maxfiles'
                new lang_string('maxfiles', 'assignsubmission_advanced'),
                new lang_string('maxfiles_help', 'assignsubmission_advanced'), 20, PARAM_INT));
 
+// Don't allow teachers to overrule noforce.
+$settings->add(new admin_setting_configcheckbox('assignsubmission_advanced/forcenoforce',
+               new lang_string('forcenoforce', 'assignsubmission_advanced'),
+               new lang_string('forcenoforce_help', 'assignsubmission_advanced'), 0));
+
+
 if (isset($CFG->maxbytes)) {
     $name = new lang_string('maxbytes', 'assignsubmission_advanced');
     $maxbytes = get_config('assignsubmission_advanced', 'maxbytes');

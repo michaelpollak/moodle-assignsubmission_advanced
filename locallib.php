@@ -67,27 +67,37 @@ class assign_submission_advanced extends assign_submission_plugin {
     public function get_settings(MoodleQuickForm $mform) {
         global $CFG, $COURSE;
 
-        // Teachers view.
-        // Get admin configuration.
+        // Teachers view, get admin configuration first.
         $adminconf = get_config('assignsubmission_advanced');
 
-        // Check if we already have an instance to work with.
-        if ($this->assignment->has_instance()) {
+        $defaultmaxheight = $adminconf->maxheight;
+        $defaultmaxwidth = $adminconf->maxwidth;
+        $defaultmaxfilesize = $adminconf->maxfilesize;
+        $defaultnoforce = 0;
+        $defaultfiletypes = $adminconf->filetypes;
+        $defaultmaxfiles = $adminconf->maxfiles;
+        $defaultmaxbytes = $adminconf->maxbytes;
+
+        if ($this->get_config('maxheight') > 0 AND !$adminconf->forcemaxheight) {
             $defaultmaxheight = $this->get_config('maxheight');
+        }
+        if ($this->get_config('maxwidth') > 0 AND !$adminconf->forcemaxwidth) {
             $defaultmaxwidth = $this->get_config('maxwidth');
+        }
+        if ($this->get_config('maxfilesize') > 0 AND !$adminconf->forcemaxfilesize) {
             $defaultmaxfilesize = $this->get_config('maxfilesize');
+        }
+        if ($this->get_config('noforce') > 0 AND isset($adminconf->forcenoforce) AND !$adminconf->forcenoforce) {
             $defaultnoforce = $this->get_config('noforce');
+        }
+        if ($this->get_config('filetypes') != '') {
             $defaultfiletypes = $this->get_config('filetypes');
+        }
+        if ($this->get_config('maxfiles') > 0) {
             $defaultmaxfiles = $this->get_config('maxfiles');
+        }
+        if ($this->get_config('maxbytes') > 0) {
             $defaultmaxbytes = $this->get_config('maxbytes');
-        } else {
-            $defaultmaxheight = $adminconf->maxheight;
-            $defaultmaxwidth = $adminconf->maxwidth;
-            $defaultmaxfilesize = $adminconf->maxfilesize;
-            $defaultnoforce = 0;
-            $defaultfiletypes = $adminconf->filetypes;
-            $defaultmaxfiles = get_config('assignsubmission_advanced', 'maxfiles');
-            $defaultmaxbytes = get_config('assignsubmission_advanced', 'maxbytes');
         }
 
         // Added a div to allow easy css templating.
@@ -99,7 +109,7 @@ class assign_submission_advanced extends assign_submission_plugin {
         $mform->addHelpButton('assignsubmission_advanced_maxwidth', 'maxwidth', 'assignsubmission_advanced');
         $mform->hideIf('assignsubmission_advanced_maxwidth', 'assignsubmission_advanced_enabled', 'notchecked');
         // If teachers are not allowed to change maxwidth, disable UI.
-        if($adminconf->forcemaxwidth) {
+        if ($adminconf->forcemaxwidth) {
             $mform->disabledIf('assignsubmission_advanced_maxwidth', 'assignsubmission_advanced_enabled', 'checked');
         }
 
@@ -109,12 +119,12 @@ class assign_submission_advanced extends assign_submission_plugin {
         $mform->addHelpButton('assignsubmission_advanced_maxheight', 'maxheight', 'assignsubmission_advanced');
         $mform->hideIf('assignsubmission_advanced_maxheight', 'assignsubmission_advanced_enabled', 'notchecked');
         // If teachers are not allowed to change maxheight, disable UI.
-        if($adminconf->forcemaxheight) {
+        if ($adminconf->forcemaxheight) {
             $mform->disabledIf('assignsubmission_advanced_maxheight', 'assignsubmission_advanced_enabled', 'checked');
         }
 
         $filesizes = array(204800 => '200kB', 512000 => '500kB', 1048576 => '1MB', 2097152 => '2MB', 5242880 => '5MB');
-        if($adminconf->allowonlysmaller) {
+        if ($adminconf->allowonlysmaller) {
             foreach ($filesizes as $size => $humanreadable) {
                 if ($size > $adminconf->maxfilesize) {
                     unset($filesizes[$size]);
@@ -126,7 +136,7 @@ class assign_submission_advanced extends assign_submission_plugin {
         $mform->setDefault('assignsubmission_advanced_maxfilesize', $defaultmaxfilesize);
         $mform->hideIf('assignsubmission_advanced_maxfilesize', 'assignsubmission_advanced_enabled', 'notchecked');
         // If teachers are not allowed to change maxheight, disable UI.
-        if($adminconf->forcemaxfilesize) {
+        if ($adminconf->forcemaxfilesize) {
             $mform->disabledIf('assignsubmission_advanced_maxfilesize', 'assignsubmission_advanced_enabled', 'checked');
         }
 
@@ -134,6 +144,10 @@ class assign_submission_advanced extends assign_submission_plugin {
         $mform->setType('assignsubmission_advanced_noforce', PARAM_INT);
         $mform->setDefault('assignsubmission_advanced_noforce', $defaultnoforce);
         $mform->hideIf('assignsubmission_advanced_noforce', 'assignsubmission_advanced_enabled', 'notchecked');
+        // If teachers are not allowed to change noforce, hide UI.
+        if ($adminconf->forcenoforce) {
+            $mform->hideIf('assignsubmission_advanced_noforce', 'assignsubmission_advanced_enabled', 'checked');
+        }
 
         // Maximum submission size over all files.
         $choices = get_max_upload_sizes($CFG->maxbytes, $COURSE->maxbytes, get_config('assignsubmission_advanced', 'maxbytes'));
