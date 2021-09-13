@@ -103,6 +103,33 @@ class assign_submission_advanced extends assign_submission_plugin {
         // Added a div to allow easy css templating.
         $mform->addElement('html', '<div id="advanced">');
 
+        // Maximum submission size over all files.
+        $choices = get_max_upload_sizes($CFG->maxbytes, $COURSE->maxbytes, get_config('assignsubmission_advanced', 'maxbytes'));
+        $name = get_string('maxbytes', 'assignsubmission_advanced');
+        $mform->addElement('select', 'assignsubmission_advanced_maxbytes', $name, $choices);
+        $mform->addHelpButton('assignsubmission_advanced_maxbytes', 'maxbytes', 'assignsubmission_advanced');
+        $mform->setDefault('assignsubmission_advanced_maxbytes', $defaultmaxbytes);
+        $mform->hideIf('assignsubmission_advanced_maxbytes', 'assignsubmission_advanced_enabled', 'notchecked');
+
+        // Maximum number of uploaded files.
+        $options = array();
+        for ($i = 1; $i <= get_config('assignsubmission_advanced', 'maxfiles'); $i++) {
+            $options[$i] = $i;
+        }
+        $name = get_string('maxfiles', 'assignsubmission_advanced');
+        $mform->addElement('select', 'assignsubmission_advanced_maxfiles', $name, $options);
+        $mform->addHelpButton('assignsubmission_advanced_maxfiles', 'maxfiles', 'assignsubmission_advanced');
+        $mform->setDefault('assignsubmission_advanced_maxfiles', $defaultmaxfiles);
+        $mform->hideIf('assignsubmission_advanced_maxfiles', 'assignsubmission_advanced_enabled', 'notchecked');
+
+        // Accepted file types.
+        $name = get_string('acceptedfiletypes', 'assignsubmission_advanced');
+        $mform->addElement('filetypes', 'assignsubmission_advanced_filetypes', $name);
+        $mform->addHelpButton('assignsubmission_advanced_filetypes', 'acceptedfiletypes', 'assignsubmission_advanced');
+        $mform->setDefault('assignsubmission_advanced_filetypes', $defaultfiletypes);
+        $mform->hideIf('assignsubmission_advanced_filetypes', 'assignsubmission_advanced_enabled', 'notchecked');
+
+        // Max width, height and filesize of single image.
         $mform->addElement('text', 'assignsubmission_advanced_maxwidth', get_string('maxwidth', 'assignsubmission_advanced'));
         $mform->setType('assignsubmission_advanced_maxwidth', PARAM_INT);
         $mform->setDefault('assignsubmission_advanced_maxwidth', $defaultmaxwidth);
@@ -148,32 +175,6 @@ class assign_submission_advanced extends assign_submission_plugin {
         if ($adminconf->forcenoforce) {
             $mform->hideIf('assignsubmission_advanced_noforce', 'assignsubmission_advanced_enabled', 'checked');
         }
-
-        // Maximum submission size over all files.
-        $choices = get_max_upload_sizes($CFG->maxbytes, $COURSE->maxbytes, get_config('assignsubmission_advanced', 'maxbytes'));
-        $name = get_string('maxbytes', 'assignsubmission_advanced');
-        $mform->addElement('select', 'assignsubmission_advanced_maxbytes', $name, $choices);
-        $mform->addHelpButton('assignsubmission_advanced_maxbytes', 'maxbytes', 'assignsubmission_advanced');
-        $mform->setDefault('assignsubmission_advanced_maxbytes', $defaultmaxbytes);
-        $mform->hideIf('assignsubmission_advanced_maxbytes', 'assignsubmission_advanced_enabled', 'notchecked');
-
-        // Maximum number of uploaded files.
-        $options = array();
-        for ($i = 1; $i <= get_config('assignsubmission_advanced', 'maxfiles'); $i++) {
-            $options[$i] = $i;
-        }
-        $name = get_string('maxfiles', 'assignsubmission_advanced');
-        $mform->addElement('select', 'assignsubmission_advanced_maxfiles', $name, $options);
-        $mform->addHelpButton('assignsubmission_advanced_maxfiles', 'maxfiles', 'assignsubmission_advanced');
-        $mform->setDefault('assignsubmission_advanced_maxfiles', $defaultmaxfiles);
-        $mform->hideIf('assignsubmission_advanced_maxfiles', 'assignsubmission_advanced_enabled', 'notchecked');
-
-        // Accepted file types.
-        $name = get_string('acceptedfiletypes', 'assignsubmission_advanced');
-        $mform->addElement('filetypes', 'assignsubmission_advanced_filetypes', $name);
-        $mform->addHelpButton('assignsubmission_advanced_filetypes', 'acceptedfiletypes', 'assignsubmission_advanced');
-        $mform->setDefault('assignsubmission_advanced_filetypes', $defaultfiletypes);
-        $mform->hideIf('assignsubmission_advanced_filetypes', 'assignsubmission_advanced_enabled', 'notchecked');
 
         $mform->addElement('html', '</div>');
     }
